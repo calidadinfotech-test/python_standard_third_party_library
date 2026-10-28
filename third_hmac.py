@@ -1,10 +1,11 @@
-from Crypto.Hash import HMAC, SHA256
+from cryptography.hazmat.primitives import hashes, hmac
 
 key = b"secret"
 message = b"Hello World"
 
-result = HMAC.new(
-    key, message, SHA256
-).hexdigest()
+h = hmac.HMAC(key, hashes.SHA256())
+h.update(message)
 
-print("Third-party HMAC:", result)
+result = h.finalize().hex()
+
+print("Cryptography HMAC:", result)
