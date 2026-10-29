@@ -26,3 +26,10 @@ print(
     "Modified message valid:",
     bls.Verify(public_key, modified_message, signature)
 )
+
+
+from blspy import AugSchemeMPL, PrivateKey
+
+sk = AugSchemeMPL.key_gen(b"0123456789abcdef0123456789abcdef")
+pk = sk.get_g1()
+signature = AugSchemeMPL.sign(sk, b"test message")
